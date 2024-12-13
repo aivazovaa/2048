@@ -1,29 +1,30 @@
+// game_model.h
 #ifndef GAME_MODEL_H
 #define GAME_MODEL_H
-
 #include <vector>
+#include <string>
 
 class GameModel {
 private:
-    int size;          // Размер игрового поля
-    int** grid;        // Игровая сетка
-    int score;         // Текущий счёт
-    bool gameOver;     // Флаг завершения игры
-    int targetValue;   // Необходимое для победы значение
+    int size;
+    std::vector<int> grid;
+    int score;           // Храним текущий счёт
+    bool gameOver;
+    int targetValue;
 
 public:
-    // Конструктор
     GameModel(int size, int targetValue);
-    
-    // Деструктор
     ~GameModel();
 
     void setTile(int row, int col, int value);
     void spawnTile();
-    bool isGameOver();
-    int getScore() const;
+    int getScore() const;            // Получение текущего счёта
+    void addScore(int value);        // Метод для увеличения счёта
     int getTile(int x, int y) const;
     int getSize() const;
+    void saveState(const std::string& filePath) const;  // Сохранение состояния
+    void loadState(const std::string& filePath);       // Загрузка состояния
+
 };
 
 #endif // GAME_MODEL_H

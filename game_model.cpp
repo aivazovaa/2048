@@ -1,30 +1,73 @@
 #include "game_model.h"
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
+#include <sstream>
+#include <stdexcept>
 
-// Конструктор
-GameModel::GameModel(int size, int targetValue)
-    : size(size), targetValue(targetValue), score(0), gameOver(false) {
-    grid = new int*[size];
-    for (int i = 0; i < size; ++i) {
-        grid[i] = new int[size]();
+void GameModel::saveState(const std::string& filePath) const {
+    std::ofstream outFile(filePath);
+    if (!outFile.is_open()) {
+        throw std::runtime_error("Ошибка: не удалось открыть файл для сохранения.");
     }
-    spawnTile(); // Появление первой карточки
-    spawnTile(); // Появление второй карточки
+
+    outFile << "size=" << size << "\n";
+    outFile << "score=" << score << "\n";
+
+    // Сохраняем игровое поле в строку
+    outFile << "grid=";
+    for (size_t i = 0; i < grid.size(); ++i) {
+        outFile << grid[i];
+        if (i < grid.size() - 1) {
+            outFile << ",";
+        }
+    }
+    outFile.close();
 }
 
-// Деструктор
+void GameModel::loadState(const std::string& filePath) {
+    std::ifstream inFile(filePath);
+    if (!inFile.is_open()) {
+        throw std::runtime_error("Ошибка: не удалось открыть файл для загрузки.");
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::istringstream is_line(line);
+        std::string key;
+        if (std::getline(is_line, key, '=')) {
+            std::string value;
+            if (std::getline(is_line, value)) {
+                if (key == "size") {
+                    size = std::stoi(value);
+                    grid.resize(size * size);
+                } else if (key == "score") {
+                    score = std::stoi(value);
+                } else if (key == "grid") {
+                    std::istringstream gridStream(value);
+                    std::string cell;
+                    for (size_t i = 0; std::getline(gridStream, cell, ','); ++i) {
+                        grid[i] = std::stoi(cell);
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+void GameModel::addScore(int value) {
+    score += value;  // Увеличиваем счёт на переданное значение
+}
+
+
+GameModel::GameModel(int size, int targetValue) : size(size), targetValue(targetValue), score(0), gameOver(false) {
+    grid.resize(size * size, 0);
+    spawnTile();
+}
+
+
 GameModel::~GameModel() {
-    for (int i = 0; i < size; ++i) {
-        delete[] grid[i];
-    }
-    delete[] grid;
-}
-
-void GameModel::setTile(int row, int col, int value) {
-    if (row >= 0 && row < size && col >= 0 && col < size) {
-        grid[row][col] = value;
-    }
 }
 
 void GameModel::spawnTile() {
@@ -34,26 +77,18 @@ void GameModel::spawnTile() {
     do {
         x = rand() % size;
         y = rand() % size;
-    } while (grid[x][y] != 0); // Ищем пустую клетку
+    } while (grid[x * size + y] != 0); // Ищем пустую клетку
 
-    grid[x][y] = (rand() % 2 == 0) ? 2 : 4; // 50% вероятность появления 2 или 4
+    grid[x * size + y] = (rand() % 2 == 0) ? 2 : 4; // 50% вероятность появления 2 или 4
 }
 
-bool GameModel::isGameOver() {
-    if (gameOver) return true;
 
-    for (int i = 0; i < size; ++i) {
-        for (int j = 0; j < size; ++j) {
-            if (grid[i][j] == 0 ||
-                (i < size - 1 && grid[i][j] == grid[i + 1][j]) ||
-                (j < size - 1 && grid[i][j] == grid[i][j + 1])) {
-                return false;
-            }
-        }
+void GameModel::setTile(int row, int col, int value) {
+    if (row >= 0 && row < size && col >= 0 && col < size) {
+        grid[row * size + col] = value;
     }
-    gameOver = true;
-    return true;
 }
+
 
 int GameModel::getScore() const {
     return score;
@@ -61,7 +96,7 @@ int GameModel::getScore() const {
 
 int GameModel::getTile(int x, int y) const {
     if (x >= 0 && x < size && y >= 0 && y < size) {
-        return grid[x][y];
+        return grid[x * size + y];
     }
     return -1; // Возвращаем -1 для некорректных координат
 }
@@ -69,4 +104,5 @@ int GameModel::getTile(int x, int y) const {
 int GameModel::getSize() const {
     return size;
 }
+
 
