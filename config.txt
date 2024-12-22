@@ -1,0 +1,2 @@
+size=5
+targetValue=2048
