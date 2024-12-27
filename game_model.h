@@ -11,6 +11,7 @@ private:
     int score;           // Храним текущий счёт
     bool gameOver;
     int targetValue;
+    bool victoryNotified = false; // Флаг для отслеживания сообщения о победе
 
 public:
     GameModel(int size, int targetValue);
@@ -22,8 +23,14 @@ public:
     void addScore(int value);        // Метод для увеличения счёта
     int getTile(int x, int y) const;
     int getSize() const;
+    int getMaxTile() const;
+    int getTargetValue() const;
     void saveState(const std::string& filePath) const;  // Сохранение состояния
     void loadState(const std::string& filePath);       // Загрузка состояния
+    void setGameOver(bool state); // Установка флага окончания игры
+    bool isGameOver() const;      // Проверка, окончена ли игра
+    void setVictoryNotified(bool notified) { victoryNotified = notified; }
+    bool isVictoryNotified() const { return victoryNotified; }
 
 };
 

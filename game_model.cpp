@@ -5,6 +5,17 @@
 #include <sstream>
 #include <stdexcept>
 
+void GameModel::setGameOver(bool state) {
+    gameOver = state;
+}
+
+bool GameModel::isGameOver() const {
+    if (getMaxTile() >= getTargetValue()) {
+        return true; // Победа должна считаться завершением игры
+    }
+    return gameOver;
+}
+
 void GameModel::saveState(const std::string& filePath) const {
     std::ofstream outFile(filePath);
     if (!outFile.is_open()) {
@@ -61,10 +72,12 @@ void GameModel::addScore(int value) {
 }
 
 
-GameModel::GameModel(int size, int targetValue) : size(size), targetValue(targetValue), score(0), gameOver(false) {
+GameModel::GameModel(int size, int targetValue)
+    : size(size), targetValue(targetValue), score(0), gameOver(false), victoryNotified(false) {
     grid.resize(size * size, 0);
     spawnTile();
 }
+
 
 
 GameModel::~GameModel() {
@@ -105,4 +118,11 @@ int GameModel::getSize() const {
     return size;
 }
 
+int GameModel::getMaxTile() const {
+    return *std::max_element(grid.begin(), grid.end());
+}
 
+
+int GameModel::getTargetValue() const {
+    return targetValue;
+}

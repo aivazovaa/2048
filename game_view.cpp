@@ -59,10 +59,14 @@ void GameView::clearScreen() {
 
 void GameView::displayGameOver() {
     std::cout << "\033[31mИгра окончена! Попробуйте снова.\033[0m\n";
+    usleep(2000000);
 }
 
 void GameView::displayVictory() {
-    std::cout << "\033[32mПоздравляем! Вы победили!\033[0m\n";
+    clearScreen();
+    std::cout << "\033[32mПоздравляем! Вы достигли целевого значения!\033[0m\n";
+    std::cout << "Нажмите любую клавишу, чтобы вернуться в меню.\n";
+    std::cin.ignore();
 }
 
 void GameView::drawScore(int score) {

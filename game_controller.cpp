@@ -80,6 +80,7 @@ void GameController::displayMenu() {
                 try {
                     model.saveState("savegame.txt");
                     std::cout << "Игра успешно сохранена!\n";
+                    sleep(2);
                 } catch (const std::exception& e) {
                     std::cerr << e.what() << "\n";
                 }
@@ -87,6 +88,8 @@ void GameController::displayMenu() {
                 try {
                     model.loadState("savegame.txt");
                     std::cout << "Игра успешно загружена!\n";
+                    return;
+                    sleep(2);
                 } catch (const std::exception& e) {
                     std::cerr << e.what() << "\n";
                 }
@@ -140,8 +143,10 @@ void GameController::changeSettings() {
         configFile << "targetValue=" << newTargetValue << "\n";
         configFile.close();
         std::cout << "Параметры успешно изменены!\n";  // Уведомление об успешном сохранении
+        usleep(2000000);
     } else {
         std::cerr << "Ошибка: не удалось сохранить параметры.\n";  // Ошибка, если не удалось сохранить файл
+        usleep(2000000);
         return;  // Возврат в меню, если не удалось сохранить файл
     }
 
@@ -265,6 +270,7 @@ void GameController::startGame() {
     if (consoleSize.width < requiredWidth || consoleSize.height < requiredHeight) {
         std::cerr << "Ошибка: Консоль слишком мала для отображения игрового поля. "
                   << "Увеличьте размер окна терминала.\n";
+        sleep(3);
         return; // Завершаем выполнение метода
     }
 
@@ -275,29 +281,46 @@ void GameController::startGame() {
     while (!rules.isGameOver(model)) {
         Direction dir = processInput();
         if (dir == MENU) {
-            // Возвращаемся в меню
-            return;
+            return; // Возврат в меню
         } else if (dir != NONE) {
             if (rules.canMove(model)) {
                 rules.move(model, dir);
                 view.display(model);
+                
+                if (model.getMaxTile() >= model.getTargetValue() && !model.isVictoryNotified()) {
+                    view.displayVictory();
+                    model.setVictoryNotified(true);
+                    sleep(100000);
+                    return; // Возврат в меню
+                }
+
+                if (rules.isGameOver(model)) {
+                    view.displayGameOver();
+                    return; // Возврат в меню
+                }
+
+                }
             } else {
                 std::cout << "Ход невозможен. Попробуйте другое направление.\n";
             }
         }
-        usleep(100000);  // Задержка для плавности
-    }
-
-    view.displayGameOver();
+        usleep(100000); // Задержка для плавности
     setNonBlockingInput(false);
 };
 
+
+
 void GameController::startNewGame() {
-    int newSize = 4;  // Значение по умолчанию
-    int newTargetValue = 2048;  // Значение по умолчанию
+    int newSize = 4;         // Значение по умолчанию для размера поля
+    int newTargetValue = 2048; // Значение по умолчанию для целевого значения
 
     // Загружаем параметры из конфигурационного файла
-    loadConfig("config.txt", newSize, newTargetValue); // Загружаем сохранённые значения из config.txt
+    try {
+        loadConfig("config.txt", newSize, newTargetValue);
+    } catch (const std::exception& e) {
+        std::cerr << "Ошибка загрузки конфигурации: " << e.what() << std::endl;
+        std::cerr << "Используются стандартные параметры игры (4x4, 2048)." << std::endl;
+    }
 
     // Перезагружаем модель игры с новыми параметрами
     model = GameModel(newSize, newTargetValue);
@@ -305,7 +328,46 @@ void GameController::startNewGame() {
     // Отображаем начальное состояние игры
     view.display(model);
 
-    std::cout << "Новая игра начата!" << std::endl;
-};
+    // Включаем неблокирующий ввод
+    setNonBlockingInput(true);
+
+    // Цикл игрового процесса
+    while (!rules.isGameOver(model)) {
+        Direction dir = processInput();
+
+        if (dir == MENU) {
+            setNonBlockingInput(false); // Отключаем неблокирующий ввод перед возвратом
+            return; // Возврат в меню
+        }
+
+        if (dir != NONE) {
+            // Проверяем, возможен ли ход
+            if (rules.canMove(model)) {
+                // Выполняем ход
+                rules.move(model, dir);
+                view.display(model);
+
+                // Проверяем, достигнута ли победа
+                if (model.getMaxTile() >= model.getTargetValue() && !model.isVictoryNotified()) {
+                    view.displayVictory();
+                    model.setVictoryNotified(true);
+                    usleep(2000000); // Пауза 2 секунды, чтобы пользователь увидел сообщение
+                    return; // Возврат в меню
+                }
+            } else {
+                std::cout << "Ход невозможен. Попробуйте другое направление.\n";
+            }
+        }
+
+        usleep(100000); // Задержка для предотвращения высокой нагрузки на процессор
+    }
+
+    // Если игра завершена, показываем сообщение об окончании
+    view.displayGameOver();
+
+    // Отключаем неблокирующий ввод перед возвратом в меню
+    setNonBlockingInput(false);
+}
+
 
 

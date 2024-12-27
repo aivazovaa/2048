@@ -23,6 +23,7 @@ public:
     bool isGameOver(const GameModel& model);
 
 private:
+    bool gameOver;
     bool combineTiles(int& a, int& b, GameModel& model);  // Передаем model как аргумент
     bool slideTiles(std::vector<int>& line);
 };

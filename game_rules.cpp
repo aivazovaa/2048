@@ -151,7 +151,18 @@ void GameRules::spawnTile(GameModel& model) {
 // Проверка окончания игры (нет свободных клеток и возможностей слияния)
 bool GameRules::isGameOver(const GameModel& model) {
     int size = model.getSize();
-
+    
+    if (model.getMaxTile() >= model.getTargetValue()) {
+        const_cast<GameModel&>(model).setGameOver(true); // Устанавливаем gameOver
+        return true;
+    }
+    
+    // Победа
+    if (model.getMaxTile() >= model.getTargetValue()) {
+        return true;
+    }
+    
+    
     // Проход по всем клеткам игрового поля
     for (int i = 0; i < size; ++i) {
         for (int j = 0; j < size; ++j) {
