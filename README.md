@@ -10,7 +10,7 @@ The program interface is implemented for the UNIX console and uses text-based gr
 
 ## Showcase
 
-![gif]([https://github.com/dalatea/Plants_vs_zombies/assets/148526614/faa34b0f-9185-4c35-a66e-e04b52e442ad](https://github.com/aivazovaa/2048/blob/cc38576e78b59ac6401372bc12b4c8f88279394c/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2024-12-28-%D0%B2-04.08.26.gif))
+![gif]([https://github.com/aivazovaa/2048/blob/cc38576e78b59ac6401372bc12b4c8f88279394c/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2024-12-28-%D0%B2-04.08.26.gif])
 
 
 ## Installation
