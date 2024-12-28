@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The game 2048 was developed as an educational project for OOP practice at Bauman Moscow State Technical University. It serves as a simulation of the popular sliding tile puzzle game, where players aim to merge numbered tiles to achieve a target value.
+The game 2048 was developed as an educational project for practice at Bauman Moscow State Technical University. It serves as a simulation of the popular sliding tile puzzle game, where players aim to merge numbered tiles to achieve a target value.
 
 The player uses W, A, S, D keys to slide the tiles in four directions: up, down, left, or right. When two tiles with the same number collide, they merge into one with double the value. The goal is to reach the target value, which defaults to 2048, but this can be configured. The game ends when no more valid moves are possible or the target value is achieved.
 
@@ -10,7 +10,7 @@ The program interface is implemented for the UNIX console and uses text-based gr
 
 ## Showcase
 
-![gif]([https://github.com/aivazovaa/2048/blob/cc38576e78b59ac6401372bc12b4c8f88279394c/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2024-12-28-%D0%B2-04.08.26.gif])
+![gif](https://github.com/aivazovaa/2048/blob/cc38576e78b59ac6401372bc12b4c8f88279394c/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2024-12-28-%D0%B2-04.08.26.gif)
 
 
 ## Installation
