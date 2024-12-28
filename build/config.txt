@@ -1,2 +1,3 @@
 size=3
-targetValue=128
+targetValue=15
+

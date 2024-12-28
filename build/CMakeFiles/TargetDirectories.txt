@@ -1,3 +1,0 @@
-/Users/karinaajvazova/work/g20480/build/CMakeFiles/Game2048.dir
-/Users/karinaajvazova/work/g20480/build/CMakeFiles/edit_cache.dir
-/Users/karinaajvazova/work/g20480/build/CMakeFiles/rebuild_cache.dir
