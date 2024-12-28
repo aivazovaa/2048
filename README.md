@@ -1,6 +1,6 @@
 # 2048
 
-##Introduction
+#Introduction
 
 The game 2048 was developed as an educational project for OOP practice at Bauman Moscow State Technical University. It serves as a simulation of the popular sliding tile puzzle game, where players aim to merge numbered tiles to achieve a target value.
 
@@ -8,12 +8,12 @@ The player uses W, A, S, D keys to slide the tiles in four directions: up, down,
 
 The program interface is implemented for the UNIX console and uses text-based graphics.
 
-##Showcase
+#Showcase
 
 ![Запись экрана от 30 01 2024 13 39 30]([https://github.com/dalatea/Plants_vs_zombies/assets/148526614/faa34b0f-9185-4c35-a66e-e04b52e442ad](https://github.com/aivazovaa/2048/blob/cc38576e78b59ac6401372bc12b4c8f88279394c/%D0%97%D0%B0%D0%BF%D0%B8%D1%81%D1%8C-%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0-2024-12-28-%D0%B2-04.08.26.gif))
 
 
-##Installation
+#Installation
 
 To install and run the game, follow these steps:
 
@@ -26,7 +26,7 @@ make
 ./Game2048 config.txt
 ```
 
-##Features
+#Features
 	1.	Configurable Board and Target:
 	•	Board size and target tile value can be customized in the config.txt file.
 	2.	Dynamic Console Resizing Check:
@@ -45,20 +45,20 @@ make
 	8.	Menu Options:
 	•	Start a new game, continue an existing one, change settings, save, load, or exit.
 
-##Requirements
+#Requirements
 	•	Operating System: UNIX-based (Linux or macOS)
 	•	Compiler: C++17 or higher
 	•	Build Tool: CMake
 	•	Terminal: Supports ANSI escape sequences for graphical display.
 
-##Configuration
+#Configuration
 
 The config.txt file allows customization of:
 	•	Board Size (size): Minimum value is 2.
 	•	Target Value (targetValue): Default is 2048.
 
 
-##Usage
+#Usage
 	1.	Run the game using the executable:
 
 ./Game2048 config.txt
