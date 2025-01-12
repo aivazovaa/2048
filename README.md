@@ -59,7 +59,7 @@ Start a new game, continue an existing one, change settings, save, load, or exit
 ## Usage
 1. Run the game using the executable:
 
-./Game2048 config.txt
+./Game2048 /config.txt
 
 2. Navigate the menu using W/S to move up or down and Enter to select options.
 3. During the game:
