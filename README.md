@@ -46,18 +46,15 @@ Notifications for achieving the target value or when no moves are left.
 Start a new game, continue an existing one, change settings, save, load, or exit.
 
 ## Requirements
-Operating System: UNIX-based (Linux or macOS)
-Compiler: C++17 or higher
-Build Tool: CMake
-Terminal: Supports ANSI escape sequences for graphical display.
+1. Operating System: UNIX-based (Linux or macOS)
+2. Compiler: C++17 or higher
+3. Build Tool: CMake
+4. Terminal: Supports ANSI escape sequences for graphical display.
 
 ## Configuration
-
-The config.txt file allows customization of:
-Board Size (size): 
-	Minimum value is 2.
-Target Value (targetValue):
-	Default is 2048.
+1. The config.txt file allows customization of:
+2. Board Size (size): Minimum value is 2;
+3. Target Value (targetValue):Default is 2048.
 
 ## Usage
 1. Run the game using the executable:
