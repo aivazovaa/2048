@@ -10,6 +10,7 @@ include_directories(src include)
 file(GLOB SOURCE_FILES
     src/*.cpp
 )
+configure_file(${CMAKE_SOURCE_DIR}/config.txt ${CMAKE_BINARY_DIR}/config.txt COPYONLY)
 
 add_executable(Game2048 ${SOURCE_FILES})
 
