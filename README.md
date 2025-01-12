@@ -28,35 +28,36 @@ make
 
 ## Features
 1. Configurable Board and Target:
-		Board size and target tile value can be customized in the config.txt file.
+Board size and target tile value can be customized in the config.txt file.
 2. Dynamic Console Resizing Check:
-		Ensures the console size is sufficient for displaying the board.
+Ensures the console size is sufficient for displaying the board.
 3. Game Saving and Loading:
-	Save your progress to a file (savegame.txt) and reload it later.
+Save your progress to a file (savegame.txt) and reload it later.
 4. Intuitive Controls:
-	W, A, S, D keys for movement.
-	M key to return to the menu.
+W, A, S, D keys for movement.
+M key to return to the menu.
 5. Score Tracking:
-	The game dynamically updates the score based on merged tiles.
+The game dynamically updates the score based on merged tiles.
 6. Graphical Updates:
-	Color-coded tiles for better visualization.
+Color-coded tiles for better visualization.
 7. Victory and Game Over:
-	Notifications for achieving the target value or when no moves are left.
+Notifications for achieving the target value or when no moves are left.
 8. Menu Options:
-	Start a new game, continue an existing one, change settings, save, load, or exit.
+Start a new game, continue an existing one, change settings, save, load, or exit.
 
 ## Requirements
-•	Operating System: UNIX-based (Linux or macOS)
-•	Compiler: C++17 or higher
-•	Build Tool: CMake
-•	Terminal: Supports ANSI escape sequences for graphical display.
+Operating System: UNIX-based (Linux or macOS)
+Compiler: C++17 or higher
+Build Tool: CMake
+Terminal: Supports ANSI escape sequences for graphical display.
 
 ## Configuration
 
 The config.txt file allows customization of:
-	•	Board Size (size): Minimum value is 2.
- 	•	Target Value (targetValue): Default is 2048.
-
+Board Size (size): 
+	Minimum value is 2.
+Target Value (targetValue):
+	Default is 2048.
 
 ## Usage
 1. Run the game using the executable:
@@ -65,6 +66,6 @@ The config.txt file allows customization of:
 
 2. Navigate the menu using W/S to move up or down and Enter to select options.
 3. During the game:
-•	Use W, A, S, D to move tiles.
-•	Press M to access the menu.
+   Use W, A, S, D to move tiles.
+   Press M to access the menu.
 
