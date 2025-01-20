@@ -53,9 +53,9 @@ Start a new game, continue an existing one, change settings, save, load, or exit
 4. Terminal: Supports ANSI escape sequences for graphical display.
 
 ## Configuration
-1. The config.txt file allows customization of:
-2. Board Size (size): Minimum value is 2;
-3. Target Value (targetValue):Default is 2048.
+The config.txt file allows customization of:
+1. Board Size (size): Minimum value is 2;
+2. Target Value (targetValue):Default is 2048.
 
 ## Usage
 1. Run the game using the executable:
