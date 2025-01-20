@@ -20,6 +20,7 @@ To install and run the game, follow these steps:
 ```bash
 git clone https://github.com/aivazovaa/2048
 cd 2048
+mkdir build
 cd build
 cmake ..
 make
