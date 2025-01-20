@@ -60,7 +60,15 @@ The config.txt file allows customization of:
 ## Usage
 1. Run the game using the executable:
 
+```bash
+git clone https://github.com/aivazovaa/2048
+cd 2048
+mkdir build
+cd build
+cmake ..
+make
 ./Game2048 /config.txt
+```
 
 2. Navigate the menu using W/S to move up or down and Enter to select options.
 3. During the game:
